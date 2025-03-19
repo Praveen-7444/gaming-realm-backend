@@ -46,6 +46,7 @@ export async function loginUserHandler(
       maxAge: 3600, 
     }).send({ message: "Login successful", token });
   } catch (error) {
+    console.log(error);
     reply.status(500).send({ message: "Error logging in" });
   }
 }

@@ -1,10 +1,12 @@
 import { FastifyInstance } from "fastify";
+import { authorizationGuard } from "../middleware/auth.middleware";
 
 
 
 async function userRoutes(fastify: FastifyInstance) {
 
-
+  fastify.addHook("preHandler",authorizationGuard)
+  
 
 // to get the list of all users
   fastify.get('/', async (request, reply) => {
