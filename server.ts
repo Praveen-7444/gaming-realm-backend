@@ -5,11 +5,6 @@ const PORT: number = Number(process.env.PORT) || 3000;
 const fastify = Fastify({ logger: true });
 const prisma = new PrismaClient();
 
-// fastify.get('/users', async (request, reply) => {
-//     const users = await prisma.user.findMany();
-//     reply.send(users);
-// });
-
 const startServer = async () => {
     try {
         await fastify.listen({ port: PORT });
@@ -25,4 +20,5 @@ fastify.get('/', async (request, reply) => {
 });
 
 fastify.register(require('./src/routes/chatbot.ts'));
+fastify.register(require('./src/routes/game.ts'))
 startServer();

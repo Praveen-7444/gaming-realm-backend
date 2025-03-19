@@ -19,3 +19,17 @@ model User {
   email String  @unique
   name  String?
 }
+
+model Game {
+  id                Int    @unique 
+  autoid               Int @id @default(autoincrement())
+  name             String  @unique
+  src               String
+  alt               String
+  desc              String
+  category          String
+  videoSrc          String
+  recentlyPlayedSrc String 
+  gameUrl           String
+  highestScore      Int @default(0)
+}
