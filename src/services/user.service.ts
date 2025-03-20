@@ -33,3 +33,10 @@ export async function deleteById(id: number) {
     where: { id },
   });
 }
+
+export async function updateUserPassword(email: string, newPassword: string) {
+  return prisma.user.update({
+    where: { email },
+    data: { password: newPassword },
+  });
+}

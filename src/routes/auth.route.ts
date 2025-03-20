@@ -5,6 +5,7 @@ import {
   registerUserHandler,
 } from "../controller/handlers/auth.controller";
 import { authorizationGuard } from "../middleware/auth.middleware";
+import {changePasswordHandler} from "../controller/handlers/changepassword.controller"
 
 async function authRoutes(fastify: FastifyInstance) {
 
@@ -15,6 +16,8 @@ async function authRoutes(fastify: FastifyInstance) {
   fastify.post("/login", loginUserHandler);
 
   fastify.post("/logout", logoutUserHandler);
+
+  fastify.post("/change-password", changePasswordHandler);
 
 }
 

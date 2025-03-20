@@ -27,14 +27,6 @@ model User {
   recentGame UserRecentGame[]
 }
 
-model Game{
-  id Int @id
-  name String
-  imageUrl String?
-  gameUrl String?
-  playedByUser UserRecentGame[]
-}
-
 model UserRecentGame{
   id Int @id @default(autoincrement())
   userId Int
@@ -46,3 +38,18 @@ model UserRecentGame{
   @@unique([userId, gameId])
 }
 
+
+model Game {
+  id                Int    @unique 
+  autoid               Int @id @default(autoincrement())
+  name             String  @unique
+  src               String
+  alt               String
+  desc              String
+  category          String
+  videoSrc          String
+  recentlyPlayedSrc String 
+  gameUrl           String
+  highestScore      Int @default(0)
+  recentGames       UserRecentGame[]
+}
