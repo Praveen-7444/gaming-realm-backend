@@ -21,3 +21,15 @@ export async function findUserByEmail(email: string) {
     where: { email },
   });
 }
+
+export async function findUserById(id: number) {
+  return await prisma.user.findUnique({
+    where: { id },
+  });
+}
+
+export async function deleteById(id: number) {
+  return await prisma.user.delete({
+    where: { id },
+  });
+}

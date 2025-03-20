@@ -22,5 +22,27 @@ model User {
   password String
   resetOtp String?
   otpExpiry DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  recentGame UserRecentGame[]
+}
+
+model Game{
+  id Int @id
+  name String
+  imageUrl String?
+  gameUrl String?
+  playedByUser UserRecentGame[]
+}
+
+model UserRecentGame{
+  id Int @id
+  userId Int
+  gameId Int
+  playedAt DateTime @default(now())
+  user User @relation(fields: [userId], references: [id])
+  game Game @relation(fields: [gameId], references: [id])
+
+  @@unique([userId, gameId])
 }
 
