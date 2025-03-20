@@ -25,4 +25,5 @@ fastify.register(fastifyCookie, {
 fastify.register(userRoutes, { prefix: '/api/users'});
 fastify.register(authRoutes, { prefix: '/api/auth'});
 fastify.register(require('./src/routes/chatbot.ts'));
+fastify.register(require('./src/routes/recentGamesRoutes.ts'));
 startServer();
