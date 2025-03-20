@@ -22,5 +22,22 @@ model User {
   password String
   resetOtp String?
   otpExpiry DateTime?
+  userTheme Theme @default(ultraviolet)
+  userFont Font @default(couriernew)
 }
 
+
+
+enum Theme {
+  ultraviolet
+  greengable
+  justblack
+  Oceanic
+}
+
+enum Font{
+  couriernew
+  trebuchetms
+  lucidasans
+  arial
+}

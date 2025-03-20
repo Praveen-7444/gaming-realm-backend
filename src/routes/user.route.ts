@@ -1,10 +1,13 @@
 import { FastifyInstance } from "fastify";
+import { getPreference, setPreference } from "../controller/handlers/user.controller";
 
 
 
 async function userRoutes(fastify: FastifyInstance) {
 
 
+  fastify.get('/:id/preference', getPreference);
+  fastify.put('/:id/preference', setPreference);
 
 // to get the list of all users
   fastify.get('/', async (request, reply) => {
@@ -50,15 +53,7 @@ fastify.get('/:id', async (request, reply) => {
 });
 
 
-fastify.get('/:id/preference', async (request, reply) => {
-  console.log('preference');
-  reply.send('preference');
-});
 
-fastify.put('/:id/preference', async (request, reply) => {
-  console.log('set preference');
-  reply.send(' set preference');
-});
 
 }
 

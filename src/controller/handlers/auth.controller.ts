@@ -32,6 +32,7 @@ export async function loginUserHandler(
 ) {
   try {
     const { email, password } = request.body as { email: string; password: string };
+    console.log(email, password)
 
     const user = await findUserByEmail(email);
     if (!user || !(await bcrypt.compare(password, user.password))) {
@@ -46,6 +47,7 @@ export async function loginUserHandler(
       maxAge: 3600, 
     }).send({ message: "Login successful", token });
   } catch (error) {
+    console.log(error)
     reply.status(500).send({ message: "Error logging in" });
   }
 }
