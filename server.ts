@@ -35,5 +35,5 @@ fastify.register(fastifyCookie, {
 fastify.register(chatRoutes);
 fastify.register(userRoutes, { prefix: '/api/users'});
 fastify.register(authRoutes, { prefix: '/api/auth'});
-
 startServer();
+

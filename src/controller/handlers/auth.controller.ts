@@ -42,12 +42,12 @@ export async function loginUserHandler(
     const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET  as string, { expiresIn: "1h" });
     reply.setCookie("token", token, {
       httpOnly: true, 
-      secure: process.env.NODE_ENV === "production", 
-      sameSite: "strict", 
+      secure: process.env.NODE_ENV === 'production' ? true : false, 
+      sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax", 
       maxAge: 3600, 
     }).send({ message: "Login successful", token });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     reply.status(500).send({ message: "Error logging in" });
   }
 }

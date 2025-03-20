@@ -1,10 +1,23 @@
 import { FastifyInstance } from "fastify";
 import { getPreference, setPreference } from "../controller/handlers/user.controller";
+import { authorizationGuard } from "../middleware/auth.middleware";
+import { deleteUser, getUser } from "../controller/handlers/user.controller";
 
 
 
 async function userRoutes(fastify: FastifyInstance) {
 
+
+  fastify.get('/:id',getUser);
+
+  fastify.delete('/:id', deleteUser);
+
+
+
+
+
+  // fastify.addHook("preHandler",authorizationGuard)
+  
 
   fastify.get('/:id/preference', getPreference);
   fastify.put('/:id/preference', setPreference);
@@ -46,11 +59,7 @@ fastify.get('games/:id/stats', async (request, reply) => {
 });
 
 
-fastify.get('/:id', async (request, reply) => {
 
-  console.log('id');
-  reply.send('id');
-});
 
 
 
