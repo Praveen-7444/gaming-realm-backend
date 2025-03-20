@@ -17,7 +17,16 @@ datasource db {
 model User {
   id    Int     @id @default(autoincrement())
   email String  @unique
-  name  String?
+  name  String
+  username String @unique
+  password String
+}
+
+model Otp{
+  id              Int    @id @default(autoincrement())
+  userId          Int    @unique
+  code        String     @unique
+  expirationDate  DateTime @default(dbgenerated("now() + interval '5 minutes'"))
 }
 
 model Game {
@@ -33,3 +42,5 @@ model Game {
   gameUrl           String
   highestScore      Int @default(0)
 }
+
+
