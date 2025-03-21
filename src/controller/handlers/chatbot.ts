@@ -11,10 +11,31 @@ export const sendChatHandler = async (
     let chatbotReply: any = [];
 
     if (currentMenu === 'main') {
-        console.log(currentMenu);
+        // let filteredGenre = null;
+
+        // if (Number(message.trim())) {
+        //     filteredGenre = genres.find(
+        //         (genre) => genre.id === Number(message.trim())
+        //     );
+        // } else {
+        //     const regex =
+        //         /\b(Mind Games|Kids Games|Single Player|Multi Player)\b/gi;
+
+        //     const match = message.match(regex);
+        //     if (match) {
+        //         console.log('Matched:', match[0]);
+        //         filteredGenre = genres.find((genre) => genre.name === match[0]);
+        //     }
+        // }
+
+        // if (filteredGenre === null) {
+        //     console.log('No match found.');
+        // }
+
         const filteredGenre = genres.find(
             (genre) => genre.id === Number(message.trim())
         );
+
         chatbotReply = filteredGenre;
     } else if (
         currentMenu === 'Mind Games' ||

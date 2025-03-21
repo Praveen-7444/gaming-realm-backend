@@ -44,4 +44,3 @@ export async function updateUserById(id: number, data: { userTheme?: Theme; user
     },
   });
 }
-

@@ -17,38 +17,39 @@ datasource db {
 model User {
   id    Int     @id @default(autoincrement())
   email String  @unique
-  username String @unique
   name  String
+  username String @unique
   password String
   resetOtp String?
-  otpExpiry DateTime?
+  otpExpiry String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  recentGame UserRecentGame[]
   userTheme Theme @default(ultraviolet)
   userFont Font @default(couriernew)
-}
-
-model Game{
-  id Int @id
-  name String
-  imageUrl String?
-  gameUrl String?
-  playedByUser UserRecentGame[]
-}
-
-model UserRecentGame{
-  id Int @id
-  userId Int
-  gameId Int
-  playedAt DateTime @default(now())
-  user User @relation(fields: [userId], references: [id])
-  game Game @relation(fields: [gameId], references: [id])
-
-  @@unique([userId, gameId])
+  likedGames  Int[] @default([])
 }
 
 
+model Otp{
+  id              Int    @id @default(autoincrement())
+  userId          Int    @unique
+  code        String     @unique
+  expirationDate  DateTime @default(dbgenerated("now() + interval '5 minutes'"))
+}
+
+model Game {
+  id                Int    @unique 
+  autoid               Int @id @default(autoincrement())
+  name             String  @unique
+  src               String
+  alt               String
+  desc              String
+  category          String
+  videoSrc          String
+  recentlyPlayedSrc String 
+  gameUrl           String
+  highestScore      Int @default(0)
+}
 
 
 

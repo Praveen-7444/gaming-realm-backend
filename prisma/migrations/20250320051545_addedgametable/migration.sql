@@ -8,7 +8,7 @@
 ALTER TABLE "User" ADD COLUMN     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 ADD COLUMN     "updatedAt" TIMESTAMP(3) NOT NULL;
 
--- CreateTable
+/*-- CreateTable
 CREATE TABLE "Game" (
     "id" INTEGER NOT NULL,
     "name" TEXT NOT NULL,
@@ -36,3 +36,4 @@ ALTER TABLE "UserRecentGame" ADD CONSTRAINT "UserRecentGame_userId_fkey" FOREIGN
 
 -- AddForeignKey
 ALTER TABLE "UserRecentGame" ADD CONSTRAINT "UserRecentGame_gameId_fkey" FOREIGN KEY ("gameId") REFERENCES "Game"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+*/
