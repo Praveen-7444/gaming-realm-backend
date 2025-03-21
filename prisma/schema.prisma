@@ -20,7 +20,7 @@ model User {
   name  String
   username String @unique
   password String
-  RecentlyPlayed String[]
+  RecentlyPlayed Int[]
 
 }
 

@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { getPostGameMessage } from "../../services/game.service";
-import { updateUserScore } from "../../services/game.service";
+// import { updateUserScore } from "../../services/game.service";
 
 export async function postGameMessageHandler(
   request: FastifyRequest,
@@ -23,22 +23,22 @@ export async function postGameMessageHandler(
 
 
 
-export async function updateScoreHandler(
-  request: FastifyRequest,
-  reply: FastifyReply
-) {
-  try {
-    const { userId, gameId, score } = request.body as { userId: number; gameId: number; score: number };
+// export async function updateScoreHandler(
+//   request: FastifyRequest,
+//   reply: FastifyReply
+// ) {
+//   try {
+//     const { userId, gameId, score } = request.body as { userId: number; gameId: number; score: number };
 
-    if (!userId || !gameId || !score) {
-      return reply.status(400).send({ message: "Missing required fields" });
-    }
+//     if (!userId || !gameId || !score) {
+//       return reply.status(400).send({ message: "Missing required fields" });
+//     }
 
-    const updatedGame = await updateUserScore(userId, gameId, score);
-    reply.send({ message: "Score updated successfully", updatedGame });
-  } catch (error) {
-    console.error(error);
-    reply.status(500).send({ message: "Error updating score" });
-  }
-}
+//     const updatedGame = await updateUserScore(userId, gameId, score);
+//     reply.send({ message: "Score updated successfully", updatedGame });
+//   } catch (error) {
+//     console.error(error);
+//     reply.status(500).send({ message: "Error updating score" });
+//   }
+// }
 

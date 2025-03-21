@@ -46,28 +46,31 @@ export async function deleteUser(
   }
 
   export async function updateUser(
-    request: FastifyRequest<{ Params: { id: any; newQueue: string[] } }>,
+    request: FastifyRequest<{ Params: { id: any} , Body : {newQueue : number[]} }>,
     reply: FastifyReply
   ) {
     try {
-      const { id, newQueue } = request.params;
+      let { id } = request.params;
+      const {newQueue} = request.body;
+      id = parseInt(id)
   
       const updatedUser = await updateRecentlyPlayedGames(id,newQueue);
   
       reply.status(200).send({ message: "User updated successfully", updatedUser });
     } catch (error) {
       console.error("Error updating user:", error);
-      reply.status(500).send({ message: "Unable to update" });
+      reply.status(500).send({ message: error });
     }
   }
   
   export async function getRecentlyPlayedGames(
-    request: FastifyRequest<{ Params: { id: number } }>,
+    request: FastifyRequest<{ Params: { id: any } }>,
     reply: FastifyReply
   ) {
     try {
-      const { id } = request.params;
-  
+      let { id } = request.params;
+      id = parseInt(id)
+
       const user = await prisma.user.findUnique({
         where: { id },
         select: { RecentlyPlayed: true },

@@ -12,7 +12,7 @@ async function userRoutes(fastify: FastifyInstance) {
 
   fastify.delete('/:id', deleteUser);
 
-  fastify.put('/id',updateUser)
+  fastify.put('/:id',updateUser)  
 
   fastify.get('/recently-played/:id', getRecentlyPlayedGames);
 

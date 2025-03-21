@@ -41,7 +41,7 @@ export async function updateUserPassword(email: string, newPassword: string) {
   });
 }
 
-export async function updateRecentlyPlayedGames(id : number,  newQueue : string[]) {
+export async function updateRecentlyPlayedGames(id : number,  newQueue : number[]) {
   return prisma.user.update({
     where:{id},
     data : {RecentlyPlayed : newQueue}
