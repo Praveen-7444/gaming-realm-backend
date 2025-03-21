@@ -17,27 +17,19 @@ datasource db {
 model User {
   id    Int     @id @default(autoincrement())
   email String  @unique
-  username String @unique
   name  String
+  username String @unique
   password String
-  resetOtp String?
-  otpExpiry DateTime?
-  createdAt DateTime @default(now())
-  updatedAt DateTime? @updatedAt
-  recentGame UserRecentGame[]
+  RecentlyPlayed String[]
+
 }
 
-model UserRecentGame{
-  id Int @id @default(autoincrement())
-  userId Int
-  gameId Int
-  playedAt DateTime @default(now())
-  user User @relation(fields: [userId], references: [id])
-  game Game @relation(fields: [gameId], references: [id])
-
-  @@unique([userId, gameId])
+model Otp{
+  id              Int    @id @default(autoincrement())
+  userId          Int    @unique
+  code        String     @unique
+  expirationDate  DateTime @default(dbgenerated("now() + interval '5 minutes'"))
 }
-
 
 model Game {
   id                Int    @unique 
@@ -51,5 +43,9 @@ model Game {
   recentlyPlayedSrc String 
   gameUrl           String
   highestScore      Int @default(0)
-  recentGames       UserRecentGame[]
+
 }
+
+
+
+

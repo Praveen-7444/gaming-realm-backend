@@ -1,9 +1,11 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { createUser, findUserById, deleteById} from "../../services/user.service";
+import { createUser, findUserById, deleteById,updateRecentlyPlayedGames} from "../../services/user.service";
 import { CreateUserInput } from "../schemas/user.schema";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import prisma from "../../utility/prisma";
+
 
 export async function getUser(
     request: FastifyRequest<{ Params: { id: any } }>,
@@ -42,3 +44,44 @@ export async function deleteUser(
     }
     reply.status(200).send({ message: "User deleted successfully" });
   }
+
+  export async function updateUser(
+    request: FastifyRequest<{ Params: { id: any; newQueue: string[] } }>,
+    reply: FastifyReply
+  ) {
+    try {
+      const { id, newQueue } = request.params;
+  
+      const updatedUser = await updateRecentlyPlayedGames(id,newQueue);
+  
+      reply.status(200).send({ message: "User updated successfully", updatedUser });
+    } catch (error) {
+      console.error("Error updating user:", error);
+      reply.status(500).send({ message: "Unable to update" });
+    }
+  }
+  
+  export async function getRecentlyPlayedGames(
+    request: FastifyRequest<{ Params: { id: number } }>,
+    reply: FastifyReply
+  ) {
+    try {
+      const { id } = request.params;
+  
+      const user = await prisma.user.findUnique({
+        where: { id },
+        select: { RecentlyPlayed: true },
+      });
+  
+      if (!user) {
+        reply.status(404).send({ message: "User not found" });
+        return;
+      }
+  
+      reply.status(200).send({ recentlyPlayed: user.RecentlyPlayed });
+    } catch (error) {
+      console.error("Error fetching recently played games:", error);
+      reply.status(500).send({ message: "Unable to fetch data" });
+    }
+  }
+  

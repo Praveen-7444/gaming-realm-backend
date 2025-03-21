@@ -1,22 +1,20 @@
 import { FastifyInstance } from "fastify";
 import { authorizationGuard } from "../middleware/auth.middleware";
-import { deleteUser, getUser } from "../controller/handlers/user.controller";
+import { deleteUser, getUser,updateUser,getRecentlyPlayedGames} from "../controller/handlers/user.controller";
 
 
 
 async function userRoutes(fastify: FastifyInstance) {
 
+  // fastify.addHook("preHandler",authorizationGuard)
 
   fastify.get('/:id',getUser);
 
   fastify.delete('/:id', deleteUser);
 
+  fastify.put('/id',updateUser)
 
-
-
-
-  // fastify.addHook("preHandler",authorizationGuard)
-  
+  fastify.get('/recently-played/:id', getRecentlyPlayedGames);
 
 // to get the list of all users
   fastify.get('/', async (request, reply) => {

@@ -1,4 +1,4 @@
--- AlterTable
-CREATE SEQUENCE userrecentgame_id_seq;
-ALTER TABLE "UserRecentGame" ALTER COLUMN "id" SET DEFAULT nextval('userrecentgame_id_seq');
-ALTER SEQUENCE userrecentgame_id_seq OWNED BY "UserRecentGame"."id";
+-- -- AlterTable
+-- CREATE SEQUENCE userrecentgame_id_seq;
+-- ALTER TABLE "UserRecentGame" ALTER COLUMN "id" SET DEFAULT nextval('userrecentgame_id_seq');
+-- ALTER SEQUENCE userrecentgame_id_seq OWNED BY "UserRecentGame"."id";

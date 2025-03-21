@@ -5,7 +5,7 @@ export async function authorizationGuard(
   request: FastifyRequest,
   reply: FastifyReply
 ) {
-  const publicRoutes = ["/login", "/signup"]; 
+  const publicRoutes = ["/profile", "/signup"]; 
   const currentPath = request.url;
 
   if (publicRoutes.includes(currentPath)) {
@@ -16,13 +16,13 @@ export async function authorizationGuard(
     const token = request.cookies.token;
 
     if (!token) {
-      return reply.redirect("api/auth/login");
+      return reply.redirect("localhost:3000/profile");
     }
 
     jwt.verify(token, process.env.JWT_SECRET as string);
 
   } catch (error) {
     console.log("Unauthorized access attempt: ", error);
-    return reply.redirect("api/auth/login");
+    return reply.redirect("localhost:3000/profile");
   }
 }

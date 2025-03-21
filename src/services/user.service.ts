@@ -40,3 +40,10 @@ export async function updateUserPassword(email: string, newPassword: string) {
     data: { password: newPassword },
   });
 }
+
+export async function updateRecentlyPlayedGames(id : number,  newQueue : string[]) {
+  return prisma.user.update({
+    where:{id},
+    data : {RecentlyPlayed : newQueue}
+  })
+}
